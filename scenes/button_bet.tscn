@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://b0btbwvbvo8px"]
-
-[node name="ButtonBet" type="Node2D" unique_id=294779001]
-
-[node name="TextureButton" type="TextureButton" parent="." unique_id=1881174020]
-offset_right = 40.0
-offset_bottom = 40.0
