@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://cyws2eaaywnh8"]
-
-[node name="ButtonConfirm" type="Node2D" unique_id=1548927428]
-
-[node name="TextureButton" type="TextureButton" parent="." unique_id=404799691]
-offset_right = 40.0
-offset_bottom = 40.0
