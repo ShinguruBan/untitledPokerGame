@@ -12,16 +12,13 @@ config_version=5
 
 config/name="untitledPokerGame"
 run/main_scene="uid://njdg52w2vkna"
-<<<<<<< HEAD
-config/features=PackedStringArray("4.6", "Forward Plus")
-=======
 config/features=PackedStringArray("4.7", "Forward Plus")
->>>>>>> 10a08f7941f56c75ab69927c3c7019449d90f98a
+config/icon="res://icon.svg"
 
-[editor]
+[display]
 
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [physics]
 

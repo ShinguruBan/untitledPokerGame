@@ -18,8 +18,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-<<<<<<< HEAD
-=======
+
 
 
 func _mouse_entered() -> void:
@@ -34,4 +33,3 @@ func _deselect_all(event):
 			if isCardSelected == true:
 				position = position + Vector2(0, 50)
 				isCardSelected = false
->>>>>>> 10a08f7941f56c75ab69927c3c7019449d90f98a
