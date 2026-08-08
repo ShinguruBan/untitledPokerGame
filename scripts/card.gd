@@ -27,3 +27,10 @@ func _mouse_entered() -> void:
 
 func _mouse_exited() -> void:
 	emit_signal("unhovered", self)
+
+func _deselect_all(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.is_pressed():
+			if isCardSelected == true:
+				position = position + Vector2(0, 50)
+				isCardSelected = false
