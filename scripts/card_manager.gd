@@ -18,6 +18,11 @@ func _input(event):
 			var card = raycast_check_for_card()
 			if card != null:
 				card.move()
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.is_pressed():
+			for _i in self.get_children ():
+				if _i.isCardSelected == true:
+					_i.move()
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
