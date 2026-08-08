@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="untitledPokerGame"
+run/main_scene="uid://njdg52w2vkna"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [editor]
