@@ -2,6 +2,9 @@ extends Node2D
 
 const PLAYER_HAND_SIZE = 5
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
+const CARD_DRAW_SPEED = 0.3
+const DECK_COORD_X = 150
+const DECK_COORD_Y = 890
 
 var player_deck = [	"Goblin", "Goblin", "Goblin", "Goblin", "Goblin", 
 					"Mimic", "Mimic", "Mimic", "Mimic", "Mimic",
@@ -20,6 +23,7 @@ func _ready() -> void:
 	card_manager_reference = $"../CardManager"
 	player_hand_reference = $"../PlayerHand"
 	card_database_reference = preload("res://scripts/card_database.gd")
+	self.position = Vector2(DECK_COORD_X, DECK_COORD_Y)
 	draw_starting_hand()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,14 +46,17 @@ func draw_card():
 	
 	#construct the card that is about to be drawn
 	var card_scene = preload(CARD_SCENE_PATH)
-	var card_image_path = str("res://assets/card_textures/" + card_drawn_type + ".png")
+	#var card_image_path = str("res://assets/card_textures/" + card_drawn_type + ".png")
+	var card_image_path = str("res://assets/icon.svg")
 	var new_card = card_scene.instantiate()
+	new_card.position = Vector2(DECK_COORD_X, DECK_COORD_Y)
 	new_card.get_node("CardImage").texture = load(card_image_path)
 	new_card.type = card_drawn_type
 	
 	#add the constructed card to the players hand
 	card_manager_reference.add_child(new_card)
-	player_hand_reference.add_card_to_hand(new_card)
+	player_hand_reference.add_card_to_hand(new_card, CARD_DRAW_SPEED)
+	new_card.get_node("AnimationPlayer").play("card_flip")
 
 func replace_cards():
 	var cards_to_draw = card_manager_reference.return_cards_to_deck()
