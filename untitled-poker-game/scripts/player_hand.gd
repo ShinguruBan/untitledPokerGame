@@ -6,6 +6,7 @@ const HAND_Y_POSITION = 890
 var player_hand = []
 var center_screen_x
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x = get_viewport().size.x / 2
@@ -13,6 +14,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
 
 func add_card_to_hand(card):
 	player_hand.insert(0, card)
