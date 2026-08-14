@@ -1,18 +1,19 @@
 extends Node2D
 
-const CARD_WIDTH = 200
-const DECK_COORD_X = 150
-const DECK_COORD_Y = 890
-const HAND_Y_POSITION = 890
+const CARD_WIDTH = 73
+const DECK_COORD_X = 320
+const DECK_COORD_Y = 100
+const HAND_X_OFFSET = 420
+const HAND_Y_POSITION = 300
 const DEFAULT_CARD_MOVEMENT_SPEED = 0.1
 
+
 var player_hand = []
-var center_screen_x
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	center_screen_x = get_viewport().size.x / 2
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,7 +42,7 @@ func update_hand_positions(speed):
 
 func calculate_card_position(index):
 	var total_width = (player_hand.size() - 1) * CARD_WIDTH
-	var x_offset = center_screen_x + index * CARD_WIDTH - total_width / 2
+	var x_offset = HAND_X_OFFSET + index * CARD_WIDTH - total_width / 2
 	return x_offset
 
 func animate_card_to_position(card, new_position, speed):

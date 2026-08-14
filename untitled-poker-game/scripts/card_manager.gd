@@ -13,6 +13,23 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func connect_card_signals(card):
+	card.connect("hovered", on_card_hovered)
+	card.connect("unhovered", on_card_unhovered)
+
+func on_card_hovered(card):
+	highlight_card(card, true)
+	
+func on_card_unhovered(card):
+	highlight_card(card, false)
+
+func highlight_card(card, hovered):
+	if hovered:
+		card.scale = Vector2(1.05, 1.05)
+		card.z_index = 2
+	else:
+		card.scale = Vector2(1, 1)
+		card.z_index = 1
 
 func switch_selection_value(card):
 	if card.is_selected == false:
@@ -21,11 +38,11 @@ func switch_selection_value(card):
 		deselect_card(card)
 
 func select_card(card):
-	card.position = card.position + Vector2(0, -50)
+	card.position = card.position + Vector2(0, -10)
 	card.is_selected = true
 
 func deselect_card(card):
-	card.position = card.position + Vector2(0, 50)
+	card.position = card.position + Vector2(0, 10)
 	card.is_selected = false
 
 func deselect_all_cards():

@@ -3,8 +3,8 @@ extends Node2D
 const PLAYER_HAND_SIZE = 5
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const CARD_DRAW_SPEED = 0.3
-const DECK_COORD_X = 150
-const DECK_COORD_Y = 890
+const DECK_COORD_X = 420
+const DECK_COORD_Y = 50
 
 var player_deck = [	"Goblin", "Goblin", "Goblin", "Goblin", "Goblin", 
 					"Mimic", "Mimic", "Mimic", "Mimic", "Mimic",
@@ -46,8 +46,8 @@ func draw_card():
 	
 	#construct the card that is about to be drawn
 	var card_scene = preload(CARD_SCENE_PATH)
-	#var card_image_path = str("res://assets/card_textures/" + card_drawn_type + ".png")
-	var card_image_path = str("res://assets/icon.svg")
+	var card_image_path = str("res://assets/card_textures/" + card_drawn_type + ".png")
+	#var card_image_path = str("res://assets/card_textures/Dragon.png")
 	var new_card = card_scene.instantiate()
 	new_card.position = Vector2(DECK_COORD_X, DECK_COORD_Y)
 	new_card.get_node("CardImage").texture = load(card_image_path)
