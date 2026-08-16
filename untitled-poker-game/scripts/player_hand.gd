@@ -13,6 +13,7 @@ var cardmanager_reference
 func _ready() -> void:
 	cardmanager_reference = $"../CardManager"
 	draw_starting_hand()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
