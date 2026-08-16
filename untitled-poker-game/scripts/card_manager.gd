@@ -13,49 +13,29 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func connect_card_signals(card):
-	card.connect("hovered", on_card_hovered)
-	card.connect("unhovered", on_card_unhovered)
 
-func on_card_hovered(card):
-	highlight_card(card, true)
+func add_card_from_deck_to_hand(player):
+	var drawn_card = deck_reference.get_top_card()
+	deck_reference.remove_top_card()
+	player.add_card_to_hand(drawn_card, deck_reference.CARD_DRAW_SPEED)
 	
-func on_card_unhovered(card):
-	highlight_card(card, false)
-
-func highlight_card(card, hovered):
-	if hovered:
-		card.scale = Vector2(1.05, 1.05)
-		card.z_index = 2
-	else:
-		card.scale = Vector2(1, 1)
-		card.z_index = 1
-
-func switch_selection_value(card):
-	if card.is_selected == false:
-		select_card(card)
-	else:
-		deselect_card(card)
-
-func select_card(card):
-	card.position = card.position + Vector2(0, -10)
-	card.is_selected = true
-
-func deselect_card(card):
-	card.position = card.position + Vector2(0, 10)
-	card.is_selected = false
-
-func deselect_all_cards():
-	for i in self.get_children():
-		if i.is_selected == true:
-			deselect_card(i)
-
-func return_cards_to_deck() -> int:
+	drawn_card.get_node("AnimationPlayer").play("card_flip")
+	
+func replace_cards_from_hand(player):
 	var number_of_returned_cards = 0
-	for i in self.get_children():
+	for i in player.get_children():
 		if i.is_selected == true:
-			player_hand_reference.remove_card_from_hand(i)		#remove card from players hand
-			deck_reference.player_deck.insert(0, i.type)		#put card into deck
-			remove_child(i)										#delete from card_manager
+			player.remove_card_from_hand(i)
+			deck_reference.add_card(i.type)
 			number_of_returned_cards = number_of_returned_cards + 1
-	return number_of_returned_cards
+	deck_reference.shuffle()
+	for i in number_of_returned_cards:
+		add_card_from_deck_to_hand(player)
+
+func animate_card_to_position(card, new_position, speed):
+	var tween = get_tree().create_tween()
+	tween.tween_property(card, "position", new_position, speed)
+	await tween.finished
+
+func animate_card_to_deck_position(card, speed):
+	animate_card_to_position(card, Vector2(deck_reference.COORD_X, deck_reference.COORD_Y), speed)

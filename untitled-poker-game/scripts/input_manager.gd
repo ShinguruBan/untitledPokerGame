@@ -3,14 +3,14 @@ extends Node2D
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_DECK = 2
 
-var card_manager_reference
 var deck_reference
+var player_reference
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	card_manager_reference = $"../CardManager"
 	deck_reference = $"../Deck"
+	player_reference = $"../PlayerHand"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -23,7 +23,7 @@ func _input(event):
 			raycast_at_cursor()			#looks what is behind the cursor and acts accordingly
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.is_pressed():
-			card_manager_reference.deselect_all_cards()
+			player_reference.deselect_all_cards()
 
 func raycast_at_cursor():
 	var space_state = get_world_2d().direct_space_state
@@ -37,6 +37,6 @@ func raycast_at_cursor():
 		if result_collision_mask == COLLISION_MASK_CARD:
 			var card_found = result[0].collider.get_parent()
 			if card_found != null:
-				card_manager_reference.switch_selection_value(card_found)
+				player_reference.switch_selection_value(card_found)
 		elif result_collision_mask == COLLISION_MASK_DECK:
-			deck_reference.replace_cards()
+			player_reference.replace_cards()
