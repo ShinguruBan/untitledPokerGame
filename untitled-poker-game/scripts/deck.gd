@@ -1,7 +1,8 @@
 extends Node2D
 
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
-const CARD_DRAW_SPEED = 0.3
+const CARD_DRAW_SPEED = 0.15
+const CARD_RETURN_SPEED = 0.25
 const COORD_X = 420
 const COORD_Y = 50
 
@@ -25,8 +26,8 @@ func _process(delta: float) -> void:
 	pass
 
 
-func add_card(card_type):
-	deck.insert(0, card_type)
+func add_card_to_bottom(card_type):
+	deck.append(card_type)
 	check_deck_availability()
 
 func remove_top_card():

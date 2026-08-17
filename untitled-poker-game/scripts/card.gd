@@ -21,3 +21,12 @@ func _mouse_entered() -> void:
 
 func _mouse_exited() -> void:
 	emit_signal("unhovered", self)
+
+func deactivate():
+	$Area2D/CollisionShape2D.disabled = true
+	$CardBackImage.visible = false
+	$CardBackgroundImage.visible = false
+	$CardImage.visible = false
+
+func get_is_selected():
+	return is_selected

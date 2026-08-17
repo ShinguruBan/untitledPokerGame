@@ -2,8 +2,8 @@ extends Node2D
 
 const CARD_WIDTH = 73
 const HAND_X_OFFSET = 420
-const HAND_Y_POSITION = 300
-const DEFAULT_CARD_MOVEMENT_SPEED = 0.1
+const SELECTED_CARD_COORD_Y = 290
+const UNSELECTED_CARD_COORD_Y = 300
 const PLAYER_HAND_SIZE = 5
 
 var cardmanager_reference
@@ -13,7 +13,6 @@ var cardmanager_reference
 func _ready() -> void:
 	cardmanager_reference = $"../CardManager"
 	draw_starting_hand()
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -23,6 +22,7 @@ func _process(delta: float) -> void:
 func draw_starting_hand():
 	for i in range(PLAYER_HAND_SIZE):
 		draw_card()
+		await cardmanager_reference.tween.finished
 
 func draw_card():
 	cardmanager_reference.add_card_from_deck_to_hand(self) 
@@ -30,21 +30,33 @@ func draw_card():
 func replace_cards():
 	cardmanager_reference.replace_cards_from_hand(self)
 
-func add_card_to_hand(card, speed):
+func add_card_to_hand(card):
 	if card not in get_children():
 		add_child(card)
-		update_hand_positions(speed)
+		update_hand_positions()
+
+func replace_card_from_hand(to_be_replaced, replacement):
+	if to_be_replaced in get_children():
+		to_be_replaced.add_sibling(replacement)
+		remove_child(to_be_replaced)
 
 func remove_card_from_hand(card):
 	if card in get_children():
-		cardmanager_reference.animate_card_to_deck_position(card, DEFAULT_CARD_MOVEMENT_SPEED)
+		cardmanager_reference.animate_card_to_deck_position(card)
+		await cardmanager_reference.tween.finished
 		remove_child(card)
 
-func update_hand_positions(speed):
+func update_hand_positions():
+	var card_position_y
 	for i in range(get_children().size()):
-		var new_position = Vector2(calculate_card_position(i), HAND_Y_POSITION)
 		var card = get_child(i)
-		cardmanager_reference.animate_card_to_position(card, new_position, speed)
+		if card.get_is_selected():
+			card_position_y = SELECTED_CARD_COORD_Y
+		else:
+			card_position_y = UNSELECTED_CARD_COORD_Y
+		
+		var new_position = Vector2(calculate_card_position(i), card_position_y)
+		cardmanager_reference.animate_card_to_position(card, new_position)
 
 func calculate_card_position(index):
 	var total_width = (get_children().size() - 1) * CARD_WIDTH
@@ -58,11 +70,11 @@ func switch_selection_value(card):
 		deselect_card(card)
 
 func select_card(card):
-	card.position = card.position + Vector2(0, -10)
+	card.position = Vector2(card.position.x, SELECTED_CARD_COORD_Y)
 	card.is_selected = true
 
 func deselect_card(card):
-	card.position = card.position + Vector2(0, 10)
+	card.position = Vector2(card.position.x, UNSELECTED_CARD_COORD_Y)
 	card.is_selected = false
 
 func deselect_all_cards():
