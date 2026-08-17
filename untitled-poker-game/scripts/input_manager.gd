@@ -5,12 +5,14 @@ const COLLISION_MASK_DECK = 2
 
 var deck_reference
 var player_reference
+var opponent_reference
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	deck_reference = $"../Deck"
 	player_reference = $"../PlayerHand"
+	opponent_reference = $"../OpponentHand"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -36,7 +38,8 @@ func raycast_at_cursor():
 		
 		if result_collision_mask == COLLISION_MASK_CARD:
 			var card_found = result[0].collider.get_parent()
-			if card_found != null:
+			if card_found != null && card_found in player_reference.get_children():
 				player_reference.switch_selection_value(card_found)
 		elif result_collision_mask == COLLISION_MASK_DECK:
 			player_reference.replace_cards()
+			opponent_reference.opponent_turn()

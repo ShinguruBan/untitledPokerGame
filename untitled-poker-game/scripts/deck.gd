@@ -6,12 +6,12 @@ const CARD_RETURN_SPEED = 0.25
 const COORD_X = 420
 const COORD_Y = 50
 
-var deck = [	"Goblin", "Goblin", "Goblin", "Goblin", "Goblin", 
-				"Mimic", "Mimic", "Mimic", "Mimic", "Mimic",
-				"Skeleton", "Skeleton", "Skeleton", "Skeleton", "Skeleton",
-				"Siren", "Siren", "Siren", "Siren", "Siren",
-				"Chimera", "Chimera", "Chimera", "Chimera", "Chimera",
-				"Dragon", "Dragon", "Dragon", "Dragon", "Dragon"]
+var deck = ["Goblin", "Goblin", "Goblin", "Goblin", "Goblin", 
+			"Mimic", "Mimic", "Mimic", "Mimic", "Mimic",
+			"Skeleton", "Skeleton", "Skeleton", "Skeleton", "Skeleton",
+			"Siren", "Siren", "Siren", "Siren", "Siren",
+			"Chimera", "Chimera", "Chimera", "Chimera", "Chimera",
+			"Dragon", "Dragon", "Dragon", "Dragon", "Dragon"]
 var card_database_reference
 
 
@@ -50,8 +50,8 @@ func get_top_card():
 	
 	#construct top card
 	var card_scene = preload(CARD_SCENE_PATH)
-	#var card_image_path = str("res://assets/card_textures/" + top_card_type + ".png")
-	var card_image_path = str("res://assets/card_textures/Dragon.png")
+	var card_image_path = str("res://assets/card_textures/" + top_card_type + ".png")
+	#var card_image_path = str("res://assets/card_textures/Dragon.png")
 	var top_card = card_scene.instantiate()
 	top_card.position = Vector2(COORD_X, COORD_Y)
 	top_card.get_node("CardImage").texture = load(card_image_path)

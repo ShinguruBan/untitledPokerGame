@@ -2,22 +2,42 @@ extends Node2D
 
 const CARD_WIDTH = 73
 const HAND_X_OFFSET = 420
-const SELECTED_CARD_COORD_Y = 300
-const UNSELECTED_CARD_COORD_Y = 310
+const SELECTED_CARD_COORD_Y = 180
+const UNSELECTED_CARD_COORD_Y = 170
 const PLAYER_HAND_SIZE = 5
 
 var cardmanager_reference
-
+var timer_reference
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cardmanager_reference = $"../CardManager"
+	timer_reference = $"../Timer"
+	timer_reference.one_shot = true
+	timer_reference.wait_time = 0.5
 	draw_starting_hand()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
+func opponent_turn():
+	var card_type = ["Goblin", "Mimic", "Skeleton", "Siren", "Chimera", "Dragon"]
+	var amount = [0, 0, 0, 0, 0, 0]
+	for i in self.get_children():
+		for j in range(card_type.size()):
+			if i.type == card_type[j]:
+				amount[j] = amount[j] + 1
+				break
+	for i in self.get_children():
+		for j in range(amount.size()):
+			if i.type == card_type[j] && amount[j] == 1:
+				select_card(i)
+				timer_reference.start()
+				await timer_reference.timeout
+				break
+	
+	replace_cards()
 
 func draw_starting_hand():
 	for i in range(PLAYER_HAND_SIZE):
@@ -39,12 +59,6 @@ func replace_card_from_hand(to_be_replaced, replacement):
 	if to_be_replaced in self.get_children():
 		to_be_replaced.add_sibling(replacement)
 		self.remove_child(to_be_replaced)
-
-func remove_card_from_hand(card):
-	if card in self.get_children():
-		cardmanager_reference.animate_card_to_deck_position(card)
-		await cardmanager_reference.tween.finished
-		self.remove_child(card)
 
 func update_hand_positions():
 	var card_position_y
@@ -77,25 +91,5 @@ func deselect_card(card):
 	card.position = Vector2(card.position.x, UNSELECTED_CARD_COORD_Y)
 	card.is_selected = false
 
-func deselect_all_cards():
-	for i in self.get_children():
-		if i.is_selected == true:
-			deselect_card(i)
-
 func connect_card_signals(card):
-	card.connect("hovered", on_card_hovered)
-	card.connect("unhovered", on_card_unhovered)
-	
-func on_card_hovered(card):
-	highlight_card(card, true)
-	
-func on_card_unhovered(card):
-	highlight_card(card, false)
-
-func highlight_card(card, hovered):
-	if hovered:
-		card.scale = Vector2(1.05, 1.05)
-		card.z_index = 2
-	else:
-		card.scale = Vector2(1, 1)
-		card.z_index = 1
+	print("connected")
