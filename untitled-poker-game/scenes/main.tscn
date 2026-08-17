@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cgubc468a6nhy" path="res://scenes/opponent_hand.tscn" id="3_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://x5ahms0se6x" path="res://scenes/input_manager.tscn" id="4_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cojqr2til1ls2" path="res://scenes/dealer.tscn" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://cnyav8u0r6f76" path="res://scenes/dealer.gd" id="7_o6xl0"]
 
 [node name="Main" type="Node2D" unique_id=1421379949]
 
@@ -22,3 +23,4 @@
 [node name="Timer" type="Timer" parent="." unique_id=667180407]
 
 [node name="Dealer" parent="." unique_id=99168638 instance=ExtResource("6_tefeu")]
+script = ExtResource("7_o6xl0")
