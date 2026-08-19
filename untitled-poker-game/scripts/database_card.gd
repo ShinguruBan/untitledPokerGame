@@ -1,3 +1,6 @@
+const INDEX_NAME = 0
+const INDEX_AMOUNT = 1
+
 const CARD_TYPES = {
 	#value, card type, amount in deck
 	0 : ["Goblin", 5],

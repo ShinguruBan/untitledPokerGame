@@ -6,10 +6,16 @@ func initialize_individual_values():
 	unselected_card_coord_y = 310
 	selected_card_ccord_y = 300
 
+func draw_starting_hand():
+	for i in range(PLAYER_HAND_SIZE):
+		draw_card()
+		await cardmanager_reference.tween.finished
+	flip_all_cards_up()
+
 func deselect_all_cards():
-	for i in self.get_children():
-		if i.is_selected == true:
-			deselect_card(i)
+	for card in self.get_children():
+		if card.is_selected == true:
+			deselect_card(card)
 
 func connect_card_signals(card):
 	card.connect("hovered", on_card_hovered)

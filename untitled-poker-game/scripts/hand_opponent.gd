@@ -2,11 +2,6 @@ extends BaseHand
 
 var card_database_reference
 
-func draw_starting_hand():
-	for i in range(PLAYER_HAND_SIZE):
-		draw_card()
-		await cardmanager_reference.tween.finished
-
 func initialize_individual_values():
 	id = "opponent"
 	cardmanager_reference = $"../../CardManager"
@@ -19,15 +14,15 @@ func opponent_turn():
 	for i in range(card_database_reference.CARD_TYPES.size()):
 		amount_of_each_card.append(0)
 	
-	for i in self.get_children():
-		for j in range(amount_of_each_card.size()):
-			if i.type == j:
-				amount_of_each_card[j] = amount_of_each_card[j] + 1
+	for card in self.get_children():
+		for index_type in range(amount_of_each_card.size()):
+			if card.type == index_type:
+				amount_of_each_card[index_type] = amount_of_each_card[index_type] + 1
 				break
 	
-	for i in self.get_children():
-		for j in range(amount_of_each_card.size()):
-			if i.type == j && amount_of_each_card[j] == 1:
-				select_card(i)
+	for card in self.get_children():
+		for index_type in range(amount_of_each_card.size()):
+			if card.type == index_type && amount_of_each_card[index_type] == 1:
+				select_card(card)
 				break
 	replace_cards()

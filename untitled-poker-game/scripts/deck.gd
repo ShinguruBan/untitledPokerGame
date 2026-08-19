@@ -1,10 +1,10 @@
 extends Node2D
 
-const EACH_CARD_AMOUNT = 5
 const CARD_DRAW_SPEED = 0.15
 const CARD_RETURN_SPEED = 0.25
 const COORD_X = 420
 const COORD_Y = 50
+
 
 var deck = []
 var card_database_reference
@@ -16,9 +16,9 @@ func _ready() -> void:
 	$Sprite2D.visible = true
 	card_database_reference = preload("res://scripts/database_card.gd")
 	card_scene_reference = preload("res://scenes/card.tscn")
-	for i in range(card_database_reference.CARD_TYPES.size()):
-		for j in card_database_reference.CARD_TYPES[i][1]:
-			add_card_to_bottom(i)
+	for type_index in range(card_database_reference.CARD_TYPES.size()):
+		for j in card_database_reference.CARD_TYPES[type_index][card_database_reference.INDEX_AMOUNT]:
+			add_card_to_bottom(type_index)
 	shuffle()
 	self.position = Vector2(COORD_X, COORD_Y)
 
@@ -42,14 +42,14 @@ func shuffle():
 	deck.shuffle()
 
 func get_top_card():
-	var top_card_type = deck[0]
+	var top_type_index = deck[0]
 	
 	#construct top card
-	var card_image_path = str("res://assets/card_textures/" + card_database_reference.CARD_TYPES[top_card_type][0] + ".png")
+	var card_image_path = str("res://assets/card_textures/" + card_database_reference.CARD_TYPES[top_type_index][card_database_reference.INDEX_NAME] + ".png")
 	var card_scene = card_scene_reference
 	var top_card = card_scene.instantiate()
 	top_card.position = Vector2(COORD_X, COORD_Y)
 	top_card.get_node("CardImage").texture = load(card_image_path)
-	top_card.type = top_card_type
+	top_card.type = top_type_index
 	
 	return top_card

@@ -15,20 +15,20 @@ func add_card_from_deck_to_hand(player):
 func replace_cards_from_hand(player):
 	var number_of_returned_cards = 0
 	var selected_cards = []
-	for i in player.get_children():
-		if i.is_selected == true:
-			animate_card_to_deck(i)
-			selected_cards.append(i)
+	for card in player.get_children():
+		if card.is_selected == true:
+			animate_card_to_deck(card)
+			selected_cards.append(card)
 			number_of_returned_cards = number_of_returned_cards + 1
 	if selected_cards.size() > 0:
 		await tween.finished
-	for i in selected_cards:
-		i.deactivate()
-	for i in selected_cards:
+	for card in selected_cards:
+		card.deactivate()
+	for card in selected_cards:
 		var replacement = deck_reference.get_top_card()
 		deck_reference.remove_top_card()
-		player.replace_card_from_hand(i, replacement)
-		deck_reference.add_card_to_bottom(i.type)
+		player.replace_card_from_hand(card, replacement)
+		deck_reference.add_card_to_bottom(card.type)
 		player.update_hand_positions()
 		await tween.finished
 	player.flip_all_cards_up()
@@ -37,15 +37,16 @@ func replace_cards_from_hand(player):
 func return_cards_to_deck(player):
 	var number_of_returned_cards = 0
 	var selected_cards = []
-	for i in player.get_children():
-		if i.is_selected == true:
-			animate_card_to_deck(i)
-			selected_cards.append(i)
+	for card in player.get_children():
+		if card.is_selected == true:
+			animate_card_to_deck(card)
+			selected_cards.append(card)
 			number_of_returned_cards = number_of_returned_cards + 1
-	await tween.finished
-	for i in selected_cards:
-		player.remove_card_from_hand(i)
-		deck_reference.add_card_to_bottom(i.type)
+	if selected_cards.size() > 0:
+		await tween.finished
+	for card in selected_cards:
+		player.remove_card_from_hand(card)
+		deck_reference.add_card_to_bottom(card.type)
 	deck_reference.shuffle()
 
 func animate_card_to_position(card, new_position):

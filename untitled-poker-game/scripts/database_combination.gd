@@ -1,3 +1,6 @@
+const INDEX_NAME = 0
+const INDEX_PRIZE = 1
+
 const POSSIBLE_COMBINATIONS = {
 	#value, vombination name, prize
 	0 : ["One Pair", 2],

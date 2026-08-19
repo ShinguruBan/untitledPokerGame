@@ -9,45 +9,42 @@ func _ready() -> void:
 	combination_database_reference = preload("res://scripts/database_combination.gd")
 
 func decide_winner():
-	var card_types = []
 	var current_winner
 	var current_highest_score = -1
-	for i in range(card_database_reference.CARD_TYPES.size()):
-		card_types.append(i)
 	
-	for i in self.get_children():
-		var amount = []
-		for j in range(card_database_reference.CARD_TYPES.size()):
-			amount.append(0)
+	for player in self.get_children():
+		var amount_of_each_card = []
+		for i in range(card_database_reference.CARD_TYPES.size()):
+			amount_of_each_card.append(0)
 		
-		for j in i.get_children():
-			for k in range(card_types.size()):
-				if j.type == card_types[k]:
-					amount[k] = amount[k] + 1
+		for card in player.get_children():
+			for index_type in range(amount_of_each_card.size()):
+				if card.type == index_type:
+					amount_of_each_card[index_type] = amount_of_each_card[index_type] + 1
 					break
 		
 		var current_score = -1
-		for k in amount:
-			if k == 2:
+		for amount in amount_of_each_card:
+			if amount == 2:
 				current_score = current_score + 1
-			elif k == 3:
+			elif amount == 3:
 				current_score = current_score + 3
-			elif k == 4:
+			elif amount == 4:
 				current_score = current_score + 5
-			elif k == 5:
+			elif amount == 5:
 				current_score = current_score + 6
 		if current_score > current_highest_score:
 			current_highest_score = current_score
-			current_winner = i
+			current_winner = player
 	print(current_winner.id)
-	print(combination_database_reference.POSSIBLE_COMBINATIONS[current_highest_score][0])
+	print(combination_database_reference.POSSIBLE_COMBINATIONS[current_highest_score][combination_database_reference.INDEX_NAME])
 
 func deal_new_cards():
-	for i in self. get_children():
-		await i.remove_entire_hand()
+	for player in self. get_children():
+		await player.remove_entire_hand()
 	var timer = $"../../Timer"
 	timer.wait_time = 2
 	timer.start()
 	await timer.timeout
-	for i in self. get_children():
-		i.draw_starting_hand()
+	for player in self. get_children():
+		player.draw_starting_hand()

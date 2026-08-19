@@ -3,27 +3,20 @@ extends Node2D
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_DECK = 2
 
-var deck_reference
 var hand_manager_reference
 var player_reference
 var opponent_reference
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	deck_reference = $"../Deck"
 	player_reference = $"../Dealer/HandManager/PlayerHand"
 	opponent_reference = $"../Dealer/HandManager/OpponentHand"
 	hand_manager_reference = $"../Dealer/HandManager"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
-			raycast_at_cursor()			#looks what is behind the cursor and acts accordingly
+			raycast_at_cursor()				#looks what is behind the cursor and acts accordingly
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.is_pressed():
 			player_reference.deselect_all_cards()
@@ -46,5 +39,10 @@ func raycast_at_cursor():
 			await player_reference.turn_end
 			opponent_reference.opponent_turn()
 			await opponent_reference.turn_end
+			
 			hand_manager_reference.decide_winner()
+			var timer = $"../Timer"
+			timer.wait_time = 2
+			timer.start()
+			await timer.timeout
 			hand_manager_reference.deal_new_cards()
