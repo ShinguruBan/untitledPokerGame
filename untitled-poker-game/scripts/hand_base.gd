@@ -7,7 +7,6 @@ const HAND_X_OFFSET = 420
 const PLAYER_HAND_SIZE = 5
 
 signal flipped_up
-signal flipped_down
 signal turn_end
 
 var id
@@ -29,15 +28,23 @@ func draw_starting_hand():
 		await cardmanager_reference.tween.finished
 	flip_all_cards_up()
 
+func remove_entire_hand():
+	for i in self.get_children():
+		select_card(i)
+	remove_cards()
+
 func draw_card():
 	cardmanager_reference.add_card_from_deck_to_hand(self) 
 
 func replace_cards():
-	flip_selected_cards_down()
-	await flipped_down
+	await flip_selected_cards_down()
 	cardmanager_reference.replace_cards_from_hand(self)
 	await flipped_up
 	emit_signal("turn_end")
+
+func remove_cards():
+	await flip_selected_cards_down()
+	cardmanager_reference.return_cards_to_deck(self)
 
 func add_card_to_hand(card):
 	self.add_child(card)
@@ -46,6 +53,10 @@ func add_card_to_hand(card):
 func replace_card_from_hand(to_be_replaced, replacement):
 	to_be_replaced.add_sibling(replacement)
 	self.remove_child(to_be_replaced)
+
+func remove_card_from_hand(card):
+	if card in self.get_children():
+		self.remove_child(card)
 
 func update_hand_positions():
 	var card
@@ -92,7 +103,6 @@ func flip_selected_cards_down():
 			i.get_node("AnimationPlayer").play_backwards("card_flip")
 			await i.get_node("AnimationPlayer").animation_finished
 			i.set_is_face_up(false)
-	emit_signal("flipped_down")
 
 func connect_card_signals(card):
 	pass

@@ -1,14 +1,12 @@
 extends Node2D
 
 var card_database_reference
+var combination_database_reference
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	card_database_reference = preload("res://scripts/database_card.gd")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	combination_database_reference = preload("res://scripts/database_combination.gd")
 
 func decide_winner():
 	var card_types = []
@@ -42,10 +40,14 @@ func decide_winner():
 			current_highest_score = current_score
 			current_winner = i
 	print(current_winner.id)
-	print(current_highest_score)
+	print(combination_database_reference.POSSIBLE_COMBINATIONS[current_highest_score][0])
 
 func deal_new_cards():
 	for i in self. get_children():
-		for j in i.get_children():
-			i.select_card(j)
-			i.replace_cards()
+		await i.remove_entire_hand()
+	var timer = $"../../Timer"
+	timer.wait_time = 2
+	timer.start()
+	await timer.timeout
+	for i in self. get_children():
+		i.draw_starting_hand()

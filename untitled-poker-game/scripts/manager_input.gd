@@ -47,4 +47,4 @@ func raycast_at_cursor():
 			opponent_reference.opponent_turn()
 			await opponent_reference.turn_end
 			hand_manager_reference.decide_winner()
-			#hand_manager_reference.deal_new_cards()
+			hand_manager_reference.deal_new_cards()

@@ -2,6 +2,11 @@ extends BaseHand
 
 var card_database_reference
 
+func draw_starting_hand():
+	for i in range(PLAYER_HAND_SIZE):
+		draw_card()
+		await cardmanager_reference.tween.finished
+
 func initialize_individual_values():
 	id = "opponent"
 	cardmanager_reference = $"../../CardManager"
