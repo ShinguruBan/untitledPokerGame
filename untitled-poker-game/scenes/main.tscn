@@ -1,23 +1,28 @@
 [gd_scene format=3 uid="uid://njdg52w2vkna"]
 
 [ext_resource type="PackedScene" uid="uid://8efdjyg6g3un" path="res://scenes/card_manager.tscn" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://cukeqc2j2yusp" path="res://scenes/card.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bvp2qc3dqtwcu" path="res://scenes/player_hand.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://dm28geewnmnl7" path="res://scenes/deck.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cgubc468a6nhy" path="res://scenes/opponent_hand.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://x5ahms0se6x" path="res://scenes/input_manager.tscn" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://2vapedar2iak" path="res://scripts/manager_hand.gd" id="5_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cojqr2til1ls2" path="res://scenes/dealer.tscn" id="6_tefeu"]
 
 [node name="Main" type="Node2D" unique_id=1421379949]
 
-[node name="CardManager" parent="." unique_id=304812655 instance=ExtResource("1_0wfyh")]
+[node name="InputManager" parent="." unique_id=1141776560 instance=ExtResource("4_tbgi4")]
 
-[node name="Card" parent="CardManager" unique_id=94219371 instance=ExtResource("2_sugp2")]
-position = Vector2(508, 376)
+[node name="Timer" type="Timer" parent="." unique_id=667180407]
 
-[node name="Card2" parent="CardManager" unique_id=1981547223 instance=ExtResource("2_sugp2")]
-position = Vector2(946, 373)
+[node name="Deck" parent="." unique_id=63243658 instance=ExtResource("3_jyhfs")]
 
-[node name="Card3" parent="CardManager" unique_id=322892739 instance=ExtResource("2_sugp2")]
-position = Vector2(800, 374)
+[node name="Dealer" parent="." unique_id=99168638 instance=ExtResource("6_tefeu")]
 
-[node name="Card4" parent="CardManager" unique_id=381338468 instance=ExtResource("2_sugp2")]
-position = Vector2(655, 376)
+[node name="CardManager" parent="Dealer" unique_id=304812655 instance=ExtResource("1_0wfyh")]
 
-[node name="Card5" parent="CardManager" unique_id=1096414427 instance=ExtResource("2_sugp2")]
-position = Vector2(361, 376)
+[node name="HandManager" type="Node2D" parent="Dealer" unique_id=824785877]
+script = ExtResource("5_o6xl0")
+
+[node name="OpponentHand" parent="Dealer/HandManager" unique_id=1904996924 instance=ExtResource("3_tbgi4")]
+
+[node name="PlayerHand" parent="Dealer/HandManager" unique_id=269492479 instance=ExtResource("2_0wfyh")]
