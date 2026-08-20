@@ -13,6 +13,7 @@ func decide_winner():
 	var winner
 	var highest_score = -1
 	var winner_amount_sorted = []
+	var same_hand = false
 	
 	for player in self.get_children():
 		var amount_of_each_card = []
@@ -35,43 +36,30 @@ func decide_winner():
 				current_score = current_score + 5
 			elif amount.x == 5:
 				current_score = current_score + 6
+		
 		if current_score > highest_score:
 			highest_score = current_score
 			amount_of_each_card.sort()
 			winner_amount_sorted.assign(amount_of_each_card)
 			winner = player
 		if current_score == highest_score:
+			same_hand = false
 			amount_of_each_card.sort()
 			for i in range(winner_amount_sorted.size() - 1, 0, -1):
 				if amount_of_each_card[i].y > winner_amount_sorted[i].y:
 					winner_amount_sorted.assign(amount_of_each_card)
 					winner = player
-	print(winner.id)
+					break
+				elif amount_of_each_card[i].y < winner_amount_sorted[i].y:
+					break
+				if i == 0 && amount_of_each_card[i].y == winner_amount_sorted[i].y:
+					same_hand = true
+	if same_hand:
+		print("Tie")
+	else:
+		print(winner.id)
 	print(combination_database_reference.POSSIBLE_COMBINATIONS[highest_score][combination_database_reference.INDEX_NAME])
 	print(winner_amount_sorted)
-
-func sort_amount_of_each_card(amount_of_each_card):
-	mergesort(amount_of_each_card, 0, amount_of_each_card.size() - 1)
-
-func mergesort(array, left, right):
-	var middle = (left + right) / 2
-	if left < right:
-		mergesort(array, left, middle)
-		mergesort(array, middle + 1, right)
-		merge(array, left, middle, right)
-
-func merge(array, left, middle, right):
-	var left_index = left
-	var right_index = right
-	for i in range(left, right + 1):
-		if right_index > right || (left_index <= middle && array[left_index] <= right_index):
-			storage[i] = array[left_index]
-			left_index = left_index + 1
-		else:
-			storage[i] = array[right_index]
-			right_index = right_index + 1
-	for i in range(left, right + 1):
-		array[i] = storage[i]
 
 func deal_new_cards():
 	for player in self. get_children():
