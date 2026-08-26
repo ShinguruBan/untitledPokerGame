@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://p0i6unkt1hyi"]
+
+[ext_resource type="Texture2D" uid="uid://d2no0ew83ydsa" path="res://assets/Board.png" id="1_bw3vb"]
+[ext_resource type="Script" uid="uid://dg8wd83gjglhx" path="res://scripts/board.gd" id="1_tx6nw"]
+[ext_resource type="PackedScene" uid="uid://bpktu4bnw4h2s" path="res://scenes/note.tscn" id="3_fv4ni"]
+[ext_resource type="Texture2D" uid="uid://d2pvatw2fwpao" path="res://assets/IsGreaterSymbol.png" id="3_nglv8"]
+
+[node name="Board" type="Node2D" unique_id=1831884644]
+script = ExtResource("1_tx6nw")
+
+[node name="BoardSprite" type="Sprite2D" parent="." unique_id=1471190630]
+position = Vector2(120, 180)
+texture = ExtResource("1_bw3vb")
+
+[node name="IsGreaterSprite" type="Sprite2D" parent="BoardSprite" unique_id=1018763815]
+position = Vector2(-51, 92)
+texture = ExtResource("3_nglv8")
+
+[node name="IsGreaterSprite2" type="Sprite2D" parent="BoardSprite" unique_id=461000472]
+position = Vector2(10, 95)
+texture = ExtResource("3_nglv8")
+
+[node name="IsGreaterSprite3" type="Sprite2D" parent="BoardSprite" unique_id=1808969076]
+position = Vector2(-41, 126)
+texture = ExtResource("3_nglv8")
+
+[node name="IsGreaterSprite4" type="Sprite2D" parent="BoardSprite" unique_id=406748736]
+position = Vector2(15, 122)
+texture = ExtResource("3_nglv8")
+
+[node name="IsGreaterSprite5" type="Sprite2D" parent="BoardSprite" unique_id=1563899676]
+position = Vector2(-49, 159)
+texture = ExtResource("3_nglv8")
+
+[node name="Note" parent="BoardSprite" unique_id=1994844172 instance=ExtResource("3_fv4ni")]
+position = Vector2(-77, 94)
+
+[node name="Note2" parent="BoardSprite" unique_id=95865619 instance=ExtResource("3_fv4ni")]
+position = Vector2(-18, 93)
+
+[node name="Note3" parent="BoardSprite" unique_id=25800793 instance=ExtResource("3_fv4ni")]
+position = Vector2(-70, 126)
+
+[node name="Note4" parent="BoardSprite" unique_id=536244358 instance=ExtResource("3_fv4ni")]
+position = Vector2(-10, 129)
+
+[node name="Note5" parent="BoardSprite" unique_id=637285721 instance=ExtResource("3_fv4ni")]
+position = Vector2(-79, 157)
+
+[node name="Note6" parent="BoardSprite" unique_id=1568038155 instance=ExtResource("3_fv4ni")]
+position = Vector2(-19, 161)

@@ -2,8 +2,8 @@ class_name BaseHand
 
 extends Node2D
 
-const CARD_WIDTH = 73
-const HAND_X_OFFSET = 420
+const CARD_WIDTH = 75
+const HAND_X_OFFSET = 440
 const PLAYER_HAND_SIZE = 5
 
 signal flipped_up

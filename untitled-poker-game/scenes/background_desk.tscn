@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://b0iu44p4j3e4e"]
-
-[node name="BackgroundDesk" type="Node2D" unique_id=2063577829]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1794900666]

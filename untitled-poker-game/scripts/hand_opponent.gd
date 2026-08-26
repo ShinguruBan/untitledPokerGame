@@ -6,8 +6,8 @@ func initialize_individual_values():
 	id = "opponent"
 	cardmanager_reference = $"../../CardManager"
 	card_database_reference = preload("res://scripts/database_card.gd")
-	unselected_card_coord_y = 170
-	selected_card_ccord_y = 180
+	unselected_card_coord_y = 190
+	selected_card_ccord_y = 200
 
 func opponent_turn():
 	var amount_of_each_card = []
