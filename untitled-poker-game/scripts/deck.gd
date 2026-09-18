@@ -2,7 +2,7 @@ extends Node2D
 
 const CARD_DRAW_SPEED = 0.15
 const CARD_RETURN_SPEED = 0.25
-const COORD_X = 420
+const COORD_X = 440
 const COORD_Y = 50
 
 
