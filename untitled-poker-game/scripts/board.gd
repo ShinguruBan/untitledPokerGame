@@ -1,6 +1,6 @@
 extends Node2D
 
-const COMB_X_OFFSET = 120
+const COMB_X_OFFSET = 108
 const COMB_Y_OFFSET = 241
 const COMB_X_DISTANCE = 40
 const COMB_Y_DISTANCE = 32
@@ -27,7 +27,7 @@ func create_combination(combination):
 		var note_scene = note_scene_reference
 		var note = note_scene.instantiate()
 		
-		var total_width = (combination_database_reference.BIGGEST_COMB_SIZE) * COMB_X_DISTANCE
+		var total_width = (combination_database_reference.BIGGEST_COMB_SIZE - 1) * COMB_X_DISTANCE
 		var random_number = randomness[randi() % randomness.size()]
 		var coord_x = (COMB_X_OFFSET) + (i * COMB_X_DISTANCE - total_width / 2) + random_number
 		random_number = randomness[randi() % randomness.size()]

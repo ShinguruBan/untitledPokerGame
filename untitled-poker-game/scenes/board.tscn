@@ -13,39 +13,39 @@ position = Vector2(120, 180)
 texture = ExtResource("1_bw3vb")
 
 [node name="IsGreaterSprite" type="Sprite2D" parent="BoardSprite" unique_id=1018763815]
-position = Vector2(-51, 92)
+position = Vector2(-45, 92)
 texture = ExtResource("3_nglv8")
 
 [node name="IsGreaterSprite2" type="Sprite2D" parent="BoardSprite" unique_id=461000472]
-position = Vector2(10, 95)
+position = Vector2(16, 95)
 texture = ExtResource("3_nglv8")
 
 [node name="IsGreaterSprite3" type="Sprite2D" parent="BoardSprite" unique_id=1808969076]
-position = Vector2(-41, 126)
+position = Vector2(-35, 126)
 texture = ExtResource("3_nglv8")
 
 [node name="IsGreaterSprite4" type="Sprite2D" parent="BoardSprite" unique_id=406748736]
-position = Vector2(15, 122)
+position = Vector2(25, 123)
 texture = ExtResource("3_nglv8")
 
 [node name="IsGreaterSprite5" type="Sprite2D" parent="BoardSprite" unique_id=1563899676]
-position = Vector2(-49, 159)
+position = Vector2(-43, 159)
 texture = ExtResource("3_nglv8")
 
 [node name="Note" parent="BoardSprite" unique_id=1994844172 instance=ExtResource("3_fv4ni")]
-position = Vector2(-77, 94)
+position = Vector2(-71, 94)
 
 [node name="Note2" parent="BoardSprite" unique_id=95865619 instance=ExtResource("3_fv4ni")]
-position = Vector2(-18, 93)
+position = Vector2(-12, 93)
 
 [node name="Note3" parent="BoardSprite" unique_id=25800793 instance=ExtResource("3_fv4ni")]
-position = Vector2(-70, 126)
+position = Vector2(-64, 126)
 
 [node name="Note4" parent="BoardSprite" unique_id=536244358 instance=ExtResource("3_fv4ni")]
-position = Vector2(-10, 129)
+position = Vector2(-4, 129)
 
 [node name="Note5" parent="BoardSprite" unique_id=637285721 instance=ExtResource("3_fv4ni")]
-position = Vector2(-79, 157)
+position = Vector2(-73, 157)
 
 [node name="Note6" parent="BoardSprite" unique_id=1568038155 instance=ExtResource("3_fv4ni")]
-position = Vector2(-19, 161)
+position = Vector2(-13, 161)

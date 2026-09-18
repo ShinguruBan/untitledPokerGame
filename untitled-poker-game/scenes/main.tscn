@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://njdg52w2vkna"]
 
 [ext_resource type="PackedScene" uid="uid://8efdjyg6g3un" path="res://scenes/card_manager.tscn" id="1_0wfyh"]
-[ext_resource type="Texture2D" uid="uid://d2no0ew83ydsa" path="res://assets/Board.png" id="1_85g3d"]
 [ext_resource type="PackedScene" uid="uid://p0i6unkt1hyi" path="res://scenes/board.tscn" id="1_tipki"]
 [ext_resource type="PackedScene" uid="uid://bvp2qc3dqtwcu" path="res://scenes/player_hand.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dm28geewnmnl7" path="res://scenes/deck.tscn" id="3_jyhfs"]
@@ -12,18 +11,9 @@
 
 [node name="Main" type="Node2D" unique_id=1421379949]
 
-[node name="Desk" type="Sprite2D" parent="." unique_id=279612579]
-position = Vector2(484, 240)
-rotation = 1.5707964
-scale = Vector2(1, 1.36)
-texture = ExtResource("1_85g3d")
-
 [node name="Board" parent="." unique_id=1831884644 instance=ExtResource("1_tipki")]
-position = Vector2(2, 0)
 
 [node name="InputManager" parent="." unique_id=1141776560 instance=ExtResource("4_tbgi4")]
-
-[node name="Timer" type="Timer" parent="." unique_id=667180407]
 
 [node name="Deck" parent="." unique_id=63243658 instance=ExtResource("3_jyhfs")]
 
@@ -37,3 +27,5 @@ script = ExtResource("5_o6xl0")
 [node name="OpponentHand" parent="Dealer/HandManager" unique_id=1904996924 instance=ExtResource("3_tbgi4")]
 
 [node name="PlayerHand" parent="Dealer/HandManager" unique_id=269492479 instance=ExtResource("2_0wfyh")]
+
+[node name="Timer" type="Timer" parent="." unique_id=667180407]
